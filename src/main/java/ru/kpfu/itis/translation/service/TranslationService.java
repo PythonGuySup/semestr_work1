@@ -1,6 +1,5 @@
 package ru.kpfu.itis.translation.service;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 import ru.kpfu.itis.translation.exception.YandexApiTranslationException;
 import ru.kpfu.itis.translation.model.dto.TranslationRequest;
 import ru.kpfu.itis.translation.model.dto.TranslationResponse;
@@ -57,7 +55,9 @@ public class TranslationService {
     StringBuilder translatedText = new StringBuilder();
     for (Future<YandexResponse> yandexResponseFuture : futures) {
       try {
-        translatedText.append(yandexResponseFuture.get().text()).append(" ");
+        translatedText
+            .append(yandexResponseFuture.get().translations().getFirst().text())
+            .append(" ");
       } catch (ExecutionException e) {
         log.error("Error during translation: cannot access result of async computation", e);
         throw new RuntimeException(e);
@@ -77,7 +77,7 @@ public class TranslationService {
 
   private YandexResponse getTranslationForWord(String word, LanguageCode targetedLanguage) {
     Map<String, Object> requestBody = new HashMap<>();
-    requestBody.put("targetLanguageCode", targetedLanguage.toString());
+    requestBody.put("targetLanguageCode", targetedLanguage.name().toLowerCase());
     requestBody.put("folderId", cloudFolderId);
     requestBody.put("texts", Collections.singletonList(word));
 
