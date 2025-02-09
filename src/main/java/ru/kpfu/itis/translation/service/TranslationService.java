@@ -87,12 +87,8 @@ public class TranslationService {
 
     HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-
-    ResponseEntity<YandexResponse> response = restTemplate.postForEntity(
-            yandexUrl,
-            requestEntity,
-            YandexResponse.class
-    );
+    ResponseEntity<YandexResponse> response =
+        restTemplate.postForEntity(yandexUrl, requestEntity, YandexResponse.class);
 
     if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
       return response.getBody();
