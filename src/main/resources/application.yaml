@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: translation-service
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/translation_service?currentSchema=public
+    username: postgres
+    password: root
+
+server.port: 8080
+
+logging:
+  level:
+    root: INFO
+
+yandex:
+  api:
+    key: ${YANDEX_API_KEY}
+  cloud:
+    folder:
+      id: ${YANDEX_CLOUD_FOLDER_ID}
