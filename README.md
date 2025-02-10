@@ -26,7 +26,10 @@ A high-performance translation service leveraging Spring Boot and Yandex Transla
 ### 📋 Prerequisites
 
 **All Systems:**
-- Yandex Cloud Account ([Sign Up](https://cloud.yandex.com/))
+- Yandex Cloud Account ([Sign Up](https://cloud.yandex.com/)) 
+- [IAM-TOKEN](https://yandex.cloud/ru/docs/iam/concepts/authorization/iam-token)
+- [CLOUD-FOLDER-ID](https://yandex.cloud/ru/docs/resource-manager/operations/folder/get-id)
+### SIC! IAM-TOKEN ONLY VALID FOR 12 HOURS SINCE CREATING.
 
 **Windows:**
 1. [JDK 17](https://adoptium.net/temurin/releases/?version=17)

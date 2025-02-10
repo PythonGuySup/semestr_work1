@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kpfu.itis.translation.model.dto.TranslationRequest;
 import ru.kpfu.itis.translation.model.dto.TranslationResponse;
 import ru.kpfu.itis.translation.service.TranslationService;
+import ru.kpfu.itis.translation.utils.SanitizationUtils;
 
 @RestController
 @RequestMapping("/translate")
@@ -24,6 +25,7 @@ public class TranslationController {
   public TranslationResponse translate(
       @RequestBody @Valid TranslationRequest translationRequest, HttpServletRequest request) {
     return translationService.getTranslation(
-        request.getRemoteAddr(), translationRequest.toSanitizedRequest());
+        SanitizationUtils.getSanitizedString(request.getRemoteAddr()),
+        translationRequest.toSanitizedRequest());
   }
 }

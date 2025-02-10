@@ -71,6 +71,12 @@ public class TranslationService {
     translationRepository.saveLog(
         remoteAddress, translationRequest.textToTranslate(), translatedText.toString());
 
+    log.info(
+        "Logged translation request: {}, {}, {}",
+        remoteAddress,
+        translationRequest.textToTranslate(),
+        translatedText);
+
     return new TranslationResponse(
         translatedText.toString().trim(), translationRequest.targetedLanguage());
   }
